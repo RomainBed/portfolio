@@ -1,7 +1,7 @@
 ---
 title: Site de RDV
 publishDate: 2020-03-04 00:00:00
-img: /assets/Site.PNG
+img: /portfolio/assets/Site.PNG
 img_alt: Site de prise de RDV
 description: |
   Améliorer un système de prise de rendez-vous en ligne intégré à un site web existant.

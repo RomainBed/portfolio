@@ -1,7 +1,7 @@
 ---
 title: Chargeur WEB
 publishDate: 2023-12-01 00:00:00
-img: /assets/Accueil.PNG
+img: /portfolio/assets/Accueil.PNG
 img_alt: Accueil du chargeur WEB
 description: |
   Application web permettant aux clients ou aux utilisateurs de soumettre et de gérer des demandes de chargement de marchandises pour le transport.

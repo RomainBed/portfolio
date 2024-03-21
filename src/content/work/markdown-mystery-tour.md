@@ -1,7 +1,7 @@
 ---
 title: Extraction PJ
 publishDate: 2022-12-02 00:00:00
-img: /assets/raw.webp
+img: /portfolio/assets/raw.webp
 img_alt: Logo GMAIL Pièce Jointe
 description: |
   Pour une opération de facturation, j'ai développé des programmes permettant l'exportation et le trie de pièces jointes ciblées dans un drive.
