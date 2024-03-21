@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+import ContactCTA from '../components/ContactCTA.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<BaseLayout title="Parcours | Romain Bedouret" description="Parcours Romain Bedouret">
+	<div class="stack gap-20">
+		<main class="wrapper about">
+			<Hero
+				title="Mon Parcours"
+				tagline="Découvrez mon parcours et mes compétences."
+			>
+			<div class="flex justify-center"> <!-- Ajoutez cette classe pour centrer -->
+				<img
+					width="540"
+					height="375"
+					src="/assets/at-work.png"
+					alt="Jeune homme qui travaille devant un PC."
+				/>
+			</div>
+			</Hero>
+
+			<section>
+				<h2 class="section-title">Background</h2>
+				<div class="content">
+					<p>
+						D'une formation initial en informatique, j'ai progressé au fil des années grâce à de nombreux projets réalisés. Je suis depuis, toujours passionné par les nouvelles technologies. <br><br>Après avoir obtenu mon Baccalauréat Scientifique, je me suis directement tourné vers ce domaine qui me correspond parfaitement. J'ai pu à travers différent stages ainsi que mon alternance acquérir une bonne base de connaissance pour débuter mon premier CDI en tant que développeur. Celui-ci c'est brutalement arrêter à la suite d'une liquidation judiciaire dont l'entreprise à fait part dû à des résultats en baisse depuis plusieurs années (250 salariés).<br><br>Ce qui me caractérise le plus, c'est ma capacité à m'adapter à de nouveaux environnements et à apprendre de nouvelles choses. De nature ouverte, j'accorde une grande importance à la communication et au partage de connaissances.
+					</p>
+
+				</div>
+			</section>
+			<section>
+				<h2 class="section-title">Diplômes</h2>
+				<div class="content">
+					<p>BAC+3 Développement WEB (DAWIN), BTS SNIR</p>
+				</div>
+			</section>
+			<section>
+				<h2 class="section-title">Compétences</h2>
+				<div class="content">
+					<p>PHP, Symfony, HTML/CSS/Tailwind, Python, JS, MySQL, Github, Linux</p>
+				</div>
+			</section>
+			<section>
+				<h2 class="section-title">Valeurs</h2>
+				<div class="content">
+					<p>Curieux, Créatif, Autonome, Organisé, Dynamique, Polyvalent, Travail d'équipe</p>
+				</div>
+			</section>
+		</main>
+
+		<ContactCTA />
+	</div>
+</BaseLayout>
+
+<style>
+	.about {
+		display: flex;
+		flex-direction: column;
+		gap: 3.5rem;
+	}
+
+	img {
+		margin-top: 1.5rem;
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-md);
+	}
+
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		color: var(--gray-200);
+	}
+
+	.section-title {
+		grid-column-start: 1;
+		font-size: var(--text-xl);
+		color: var(--gray-0);
+	}
+
+	.content {
+		grid-column: 2 / 4;
+	}
+
+	.content :global(a) {
+		text-decoration: 1px solid underline transparent;
+		text-underline-offset: 0.25em;
+		transition: text-decoration-color var(--theme-transition);
+	}
+
+	.content :global(a:hover),
+	.content :global(a:focus) {
+		text-decoration-color: currentColor;
+	}
+
+	@media (min-width: 50em) {
+		.about {
+			display: grid;
+			grid-template-columns: 1fr 60% 1fr;
+		}
+
+		.about > :global(:first-child) {
+			grid-column-start: 2;
+		}
+
+		section {
+			display: contents;
+			font-size: var(--text-lg);
+		}
+	}
+</style>
