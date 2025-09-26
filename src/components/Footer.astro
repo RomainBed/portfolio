@@ -5,18 +5,22 @@ const currentYear = new Date().getFullYear();
 
 <footer>
 	<div class="group">
-		<!-- <p>
-			Designed & Developed in Portland with <a href="https://astro.build/">Astro</a>
-			<Icon icon="rocket-launch" size="1.2em" />
-		</p> -->
-		<p>&copy; {currentYear} Romain Bedouret</p>
+		<p>
+			&copy; <span id="year"></span> Romain Bedouret
+		</p>
 	</div>
 	<p class="socials">
 		<a href="https://www.linkedin.com/in/romain-bedouret-1454941b4/"> Linkedin</a>
-		<!-- <a href="https://github.com/me"> GitHub</a>
-		<a href="https://codepen.io/me"> CodePen</a> -->
 	</p>
 </footer>
+
+<script>
+  const yearEl = document.getElementById("year");
+  if (yearEl) {
+    yearEl.textContent = String(new Date().getFullYear());
+  }
+</script>
+
 <style>
 	footer {
 		display: flex;
