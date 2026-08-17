@@ -1,58 +1,112 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
 import ContactCTA from '../components/ContactCTA.astro';
 import Hero from '../components/Hero.astro';
+
+const experiences = [
+	{
+		company: 'SERMA ENERGY',
+		period: 'Juin 2024 à aujourd’hui',
+		role: 'Développeur Full Stack PHP / Symfony',
+		description: 'Développement et évolution d’une application métier utilisée quotidiennement par plusieurs équipes. Migration PHP vers Symfony, automatisation de traitements, dashboards et développement de fonctionnalités métier.',
+	},
+	{
+		company: 'Auromate',
+		period: 'Mars 2025 à aujourd’hui',
+		role: 'Développeur Web & Automatisation — Micro-entreprise, activité parallèle',
+		description: 'Développement web et expérimentation de solutions d’automatisation avec n8n pour simplifier des processus métier.',
+	},
+	{
+		company: 'Ynov Campus',
+		period: '2025 / 2026',
+		role: 'Jury évaluateur',
+		description: 'Participation aux jurys de la certification RNCP Expert en développement logiciel : évaluation des dossiers techniques et soutenances des candidats.',
+	},
+	{
+		company: 'Dimotrans / HDucros',
+		period: 'Septembre 2022 à avril 2024',
+		role: 'Développeur Web',
+		description: 'Développement d’applications et outils internes avec PHP, Symfony, JavaScript et Python.',
+	},
+	{
+		company: 'Intermarché',
+		period: '2019 à 2022',
+		role: 'Employé libre-service — CDI',
+		description: 'CDI occupé en parallèle de ma formation, au sein de l’équipe du magasin d’Aigrefeuille-d’Aunis.',
+	},
+	{
+		company: 'Omnium Finance',
+		period: 'Mai à juillet 2021',
+		role: 'Développeur logiciel — Stage',
+		description: 'Planification des tâches, développement d’indicateurs dans le logiciel GPLI, maintenance des postes de travail et contrôles réseau.',
+	},
+];
+
+const skills = [
+	{ title: 'Back-end', items: ['PHP', 'Symfony', 'Doctrine ORM'] },
+	{ title: 'Front-end', items: ['JavaScript', 'HTML/CSS', 'Bootstrap', 'React'] },
+	{ title: 'Bases de données', items: ['PostgreSQL', 'MySQL', 'SQL'] },
+	{ title: 'Outils & environnement', items: ['Git', 'Docker', 'Linux'] },
+	{ title: 'Automatisation', items: ['n8n', 'Python', 'VBA'] },
+	{ title: 'Autres expériences', items: ['Next.js', 'TypeScript', 'Node.js', 'Tailwind CSS'] },
+];
 ---
 
-<BaseLayout title="Parcours | Romain Bedouret" description="Parcours Romain Bedouret">
+<BaseLayout
+	title="Parcours — Romain Bedouret, Développeur Full Stack PHP / Symfony"
+	description="Parcours, expériences et compétences de Romain Bedouret, développeur Full Stack spécialisé PHP/Symfony à Bordeaux."
+>
 	<div class="stack gap-20">
-		<main class="wrapper about">
-			<Hero
-				title="Mon Parcours"
-				tagline="Découvrez mon parcours et mes compétences."
-			>
-			<div class="flex justify-center"> <!-- Ajoutez cette classe pour centrer -->
-				<img
-					width="540"
-					height="375"
-					src="/portfolio/assets/at-work.png"
-					alt="Jeune homme qui travaille devant un PC."
-				/>
-			</div>
-			</Hero>
+		<main class="wrapper about stack gap-15">
+			<Hero title="Parcours" tagline="Développeur Full Stack PHP / Symfony, je travaille depuis 2022 sur des applications web et outils métier. Mon parcours associe développement d’applications internes, conception full stack et automatisation de processus." />
 
-			<section>
-				<h2 class="section-title">Background</h2>
-				<div class="content">
-					<p>
-						Issu d’une formation initiale en informatique, j’ai développé mes compétences au fil des années à travers des expériences variées, des projets ambitieux et une curiosité constante pour les nouvelles technologies.<br><br>
+			<section aria-labelledby="experience-title">
+				<header class="section-heading">
+					<p>Expérience</p>
+					<h2 id="experience-title">Mon parcours professionnel</h2>
+				</header>
+				<ol class="timeline">
+					{experiences.map((experience) => (
+						<li>
+							<div class="timeline-marker" aria-hidden="true"></div>
+							<article>
+								<div class="experience-head">
+									<h3>{experience.company}</h3>
+									<time>{experience.period}</time>
+								</div>
+								{'location' in experience && <p class="location">{experience.location}</p>}
+								<p class="role">{experience.role}</p>
+								<p>{experience.description}</p>
+							</article>
+						</li>
+					))}
+				</ol>
+			</section>
 
-						Après mon Baccalauréat Scientifique, je me suis orienté directement vers le développement, domaine dans lequel j’ai eu l’opportunité de progresser grâce à plusieurs stages, une alternance enrichissante puis mes premiers postes en CDI. Ces expériences m’ont permis d’acquérir de solides bases en conception, développement et gestion de projets.<br><br>
-
-						Aujourd’hui, je travaille chez SERMA Energy en tant que développeur applications web, où je conçois et maintiens des outils internes stratégiques (Symfony, PHP, JavaScript, VBA) pour optimiser la productivité et accompagner les équipes métiers. En parallèle, j’exerce une activité de freelance en développement web (WordPress et sites vitrines), pour accompagner de petits commerces dans leur présence en ligne. J’ai également participé en tant que jury évaluateur à Ynov Campus, ce qui m’a permis d’évaluer et d’accompagner des étudiants dans la valorisation de leurs compétences techniques et organisationnelles.<br><br>
-
-						Ce qui me caractérise : ma capacité à m’adapter rapidement à de nouveaux environnements, à apprendre en continu et à partager mes connaissances. Ouvert et impliqué, j’accorde une importance particulière à la communication et à la collaboration, deux qualités essentielles pour faire avancer les projets efficacement.<br><br>
-					</p>
-
+			<section aria-labelledby="formation-title">
+				<header class="section-heading">
+					<p>Formation</p>
+					<h2 id="formation-title">Diplômes</h2>
+				</header>
+				<div class="education-grid">
+					<article><p class="year">2023</p><h3>Licence Professionnelle DAWIN</h3><p>Développement Web<br />Université de Bordeaux</p></article>
+					<article><p class="year">2022</p><h3>BTS SNIR</h3><p>Développement & Réseaux<br />Lycée Léonce Vieljeux</p></article>
+					<article><p class="year">2019</p><h3>Baccalauréat scientifique</h3><p>Lycée Maurice Merleau-Ponty<br />Rochefort</p></article>
 				</div>
 			</section>
-			<section>
-				<h2 class="section-title">Diplômes</h2>
-				<div class="content">
-					<p>BAC+3 Licence Pro Développement WEB (DAWIN), BTS SNIR</p>
-				</div>
-			</section>
-			<section>
-				<h2 class="section-title">Compétences</h2>
-				<div class="content">
-					<p>PHP, Symfony, HTML/CSS/Tailwind, Python, JS, MySQL, VBA, Docker, CI/CD, Github, Linux</p>
-				</div>
-			</section>
-			<section>
-				<h2 class="section-title">Valeurs</h2>
-				<div class="content">
-					<p>Curieux, Créatif, Autonome, Organisé, Dynamique, Polyvalent, Travail d'équipe</p>
+
+			<section aria-labelledby="skills-title">
+				<header class="section-heading">
+					<p>Compétences</p>
+					<h2 id="skills-title">Technologies & outils</h2>
+				</header>
+				<div class="skills-grid">
+					{skills.map((category) => (
+						<article>
+							<h3>{category.title}</h3>
+							<ul>{category.items.map((item) => <li>{item}</li>)}</ul>
+						</article>
+					))}
 				</div>
 			</section>
 		</main>
@@ -62,59 +116,36 @@ import Hero from '../components/Hero.astro';
 </BaseLayout>
 
 <style>
-	.about {
-		display: flex;
-		flex-direction: column;
-		gap: 3.5rem;
-	}
+	.about { max-width: 72rem; }
+	section { display: grid; gap: 2rem; }
+	.section-heading > p { margin-bottom: 0.5rem; color: var(--accent-dark); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+	.section-heading h2 { font-size: var(--text-3xl); }
 
-	img {
-		margin-top: 1.5rem;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
+	.timeline { padding: 0; list-style: none; }
+	.timeline > li { position: relative; display: grid; grid-template-columns: 1rem 1fr; gap: 1rem; }
+	.timeline > li:not(:last-child)::before { content: ''; position: absolute; left: 0.34rem; top: 1.35rem; bottom: 0; width: 1px; background: var(--gray-700); }
+	.timeline-marker { width: 0.75rem; height: 0.75rem; margin-top: 1.65rem; border: 2px solid var(--accent-regular); border-radius: 50%; background: var(--gray-999); z-index: 1; }
+	.timeline article { padding: 1.25rem 0 1.35rem; border-bottom: 1px solid var(--gray-800); }
+	.timeline > li:last-child article { border-bottom: 0; }
+	.education-grid article, .skills-grid article { padding: 1.5rem; border: 1px solid var(--gray-800); border-radius: 1rem; background: var(--gray-999_40); box-shadow: var(--shadow-sm); }
+	.experience-head { display: flex; flex-direction: column; gap: 0.3rem; }
+	.experience-head h3, .education-grid h3, .skills-grid h3 { font-size: var(--text-xl); }
+	time, .year { color: var(--accent-dark); font-size: var(--text-sm); font-weight: 700; }
+	.location { margin-top: 0.25rem; color: var(--gray-400); font-size: var(--text-sm); }
+	.role { margin: 0.35rem 0 0.55rem; color: var(--gray-100); font-weight: 700; }
+	.timeline article > p:last-child, .education-grid article > p:last-child { color: var(--gray-300); }
 
-	section {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		color: var(--gray-200);
-	}
-
-	.section-title {
-		grid-column-start: 1;
-		font-size: var(--text-xl);
-		color: var(--gray-0);
-	}
-
-	.content {
-		grid-column: 2 / 4;
-	}
-
-	.content :global(a) {
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
-
-	.content :global(a:hover),
-	.content :global(a:focus) {
-		text-decoration-color: currentColor;
-	}
+	.education-grid, .skills-grid { display: grid; gap: 1rem; }
+	.education-grid article { display: grid; gap: 0.6rem; }
+	.skills-grid article { display: flex; flex-direction: column; gap: 1rem; }
+	.skills-grid ul { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; list-style: none; }
+	.skills-grid li { padding: 0.4rem 0.7rem; border: 1px solid var(--gray-700); border-radius: 999rem; color: var(--gray-300); font-size: var(--text-sm); }
 
 	@media (min-width: 50em) {
-		.about {
-			display: grid;
-			grid-template-columns: 1fr 60% 1fr;
-		}
-
-		.about > :global(:first-child) {
-			grid-column-start: 2;
-		}
-
-		section {
-			display: contents;
-			font-size: var(--text-lg);
-		}
+		section { grid-template-columns: minmax(12rem, 1fr) minmax(0, 2.2fr); gap: 4rem; }
+		.section-heading h2 { font-size: var(--text-3xl); }
+		.experience-head { flex-direction: row; align-items: baseline; justify-content: space-between; gap: 2rem; }
+		.education-grid { grid-template-columns: repeat(3, 1fr); }
+		.skills-grid { grid-template-columns: 1fr 1fr; }
 	}
 </style>

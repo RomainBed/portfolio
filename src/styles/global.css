@@ -121,6 +121,8 @@ body {
 	overflow-x: hidden;
 }
 
+html { scroll-behavior: smooth; }
+
 body {
 	background-color: var(--gray-999);
 	color: var(--gray-200);
@@ -143,6 +145,12 @@ img {
 
 a {
 	color: var(--link-color);
+}
+
+a:focus-visible,
+button:focus-visible {
+	outline: 3px solid var(--accent-dark);
+	outline-offset: 3px;
 }
 
 h1,
@@ -252,4 +260,9 @@ h5 {
 	.lg\:gap-48 {
 		gap: 12rem;
 	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+	*, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
 }

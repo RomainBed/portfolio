@@ -15,7 +15,7 @@ interface Props {
 const { title, description } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="fr">
 	<head>
 		<MainHead title={title} description={description} />
 	</head>
@@ -31,7 +31,7 @@ const { title, description } = Astro.props;
 			addEventListener('load', () => document.documentElement.classList.add('loaded'));
 		</script>
 
-		<style>
+		<style is:inline>
 			:root {
 				--_placeholder-bg: linear-gradient(transparent, transparent);
 				--bg-image-main: url('/portfolio/assets/backgrounds/bg-main-light-800w.jpg');

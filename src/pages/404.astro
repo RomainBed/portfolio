@@ -1,8 +1,17 @@
 ---
 import Hero from '../components/Hero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
 ---
 
-<BaseLayout title="Not Found" description="404 Error — this page was not found">
-	<Hero title="Page Not Found" tagline="Not found" />
+<BaseLayout title="Page introuvable — Romain Bedouret" description="La page demandée est introuvable.">
+	<main class="wrapper not-found">
+		<Hero title="Page introuvable" tagline="La page demandée n’existe pas ou a été déplacée.">
+			<CallToAction href="/portfolio/">Retour à l’accueil</CallToAction>
+		</Hero>
+	</main>
 </BaseLayout>
+
+<style>
+	.not-found { display: grid; place-items: center; }
+</style>

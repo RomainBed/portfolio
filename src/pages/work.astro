@@ -8,23 +8,31 @@ import PortfolioPreview from '../components/PortfolioPreview.astro';
 import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
 
-const projects = (await getCollection('work')).sort(
-	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
-);
+const projectIds = [
+	'pose',
+	'memoire-de-classe',
+	'auromate',
+	'applications-metier-hducros-dimotrans',
+] as const;
+const allProjects = await getCollection('work');
+const projects = projectIds.map((projectId) => {
+	const project = allProjects.find((entry) => entry.id === projectId);
+	if (!project) throw new Error(`Projet obligatoire introuvable : ${projectId}`);
+	return project;
+});
 ---
 
 <BaseLayout
-	title="Mes Projets | Romain Bedouret"
-	description="Projets Romain Bedouret"
+	title="Projets — Romain Bedouret, Développeur Full Stack PHP / Symfony"
+	description="Découvrez les applications métier, projets web et automatisations réalisés par Romain Bedouret, développeur Full Stack PHP/Symfony."
 >
 	<div class="stack gap-20">
 		<main class="wrapper stack gap-8">
 			<Hero
-				title="Mes Projets"
-				tagline="Découvrez mes projets les plus récents ci-dessous pour avoir une idée de mon expérience passée."
-				align="start"
+				title="Projets"
+				tagline="Quatre projets représentatifs de mon travail : applications métier, produit web personnel et automatisation."
 			/>
-			<Grid variant="offset">
+			<Grid>
 				{
 					projects.map((project) => (
 						<li>

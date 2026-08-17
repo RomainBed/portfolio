@@ -7,18 +7,31 @@ interface Props {
 }
 
 const {
-	title = 'Romain Bedouret | Portfolio',
-	description = 'Portfolio Romain Bedouret',
+	title = 'Romain Bedouret — Développeur Full Stack PHP / Symfony',
+	description = 'Portfolio de Romain Bedouret, développeur Full Stack PHP/Symfony à Bordeaux : applications métier, projets web et automatisation.',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <meta charset="UTF-8" />
-<meta name="description" property="og:description" content={description} />
+<meta name="description" content={description} />
 <meta name="viewport" content="width=device-width" />
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
 
-<link rel="icon" type="image/svg+xml" href="/portfolio/assets/logo.jpg" />
+<link rel="canonical" href={canonicalURL} />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:site_name" content="Portfolio de Romain Bedouret" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL} />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+
+<link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link

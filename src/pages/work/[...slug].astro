@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
@@ -18,34 +18,44 @@ interface Props {
 export async function getStaticPaths() {
 	const work = await getCollection('work');
 	return work.map((entry) => ({
-		params: { slug: entry.slug },
+		params: { slug: entry.id },
 		props: { entry },
 	}));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.description}>
+<BaseLayout title={`${entry.data.title} — Romain Bedouret`} description={entry.data.description}>
 	<div class="stack gap-20">
 		<div class="stack gap-15">
 			<header>
 				<div class="wrapper stack gap-2">
 					<a class="back-link" href="/portfolio/work/"><Icon icon="arrow-left" /> Projets</a>
-					<Hero title={entry.data.title} align="start">
+					<Hero title={entry.data.title}>
 						<div class="details">
-							<div class="tags">
+							<div class="summary">
+								<p class="subtitle">{entry.data.subtitle}</p>
+								<p class="description">{entry.data.description}</p>
+							</div>
+							<div class="tags" aria-label="Technologies principales">
 								{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
 							</div>
-							<p class="description">{entry.data.description}</p>
 						</div>
 					</Hero>
 				</div>
 			</header>
 			<main class="wrapper">
-				<div class="stack gap-10 content">
-					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
+				<div class="stack gap-10 project-content">
+					{entry.data.img ? (
+						<img class="cover" src={entry.data.img} alt={entry.data.img_alt || ''} />
+					) : (
+						<div class:list={['abstract-visual', `abstract-${entry.data.order}`]} aria-hidden="true">
+							<span>Projet 0{entry.data.order}</span>
+							<strong>{entry.data.order === 1 ? 'POSE' : entry.data.order === 2 ? 'Mémoire de Classe' : 'Auromate'}</strong>
+						</div>
+					)}
 					<div class="content">
 						<Content />
 					</div>
@@ -63,32 +73,58 @@ const { Content } = await entry.render();
 	}
 
 	.back-link {
-		display: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		align-self: flex-start;
 	}
 
 	.details {
 		display: flex;
 		flex-direction: column;
-		padding: 0.5rem;
-		gap: 1.5rem;
-		justify-content: space-between;
+		gap: 1.75rem;
 		align-items: center;
 	}
 
 	.tags {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 0.5rem;
 	}
+
+	.summary { display: grid; justify-items: center; gap: 0.75rem; text-align: center; }
+	.subtitle { color: var(--accent-dark); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
 
 	.description {
 		font-size: var(--text-lg);
 		max-width: 54ch;
 	}
 
+	.project-content {
+		max-width: 58rem;
+		margin-inline: auto;
+	}
+
 	.content {
 		max-width: 65ch;
 		margin-inline: auto;
 	}
+
+	.cover, .abstract-visual {
+		width: 100%;
+		max-height: 32rem;
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-sm);
+		border: 1px solid var(--gray-800);
+	}
+
+	.cover { object-fit: cover; object-position: top; }
+	.abstract-visual { position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 0.5rem; min-height: 13rem; max-width: 50rem; margin-inline: auto; padding: 2.5rem; overflow: hidden; background: linear-gradient(135deg, #1c0056, #7611a6 55%, #c561f6); }
+	.abstract-visual::after { content: ''; position: absolute; width: 24rem; height: 24rem; right: -5rem; top: -12rem; border: 1px solid rgb(255 255 255 / 0.4); border-radius: 50%; }
+	.abstract-2 { background: linear-gradient(135deg, #15345c, #2463a5 55%, #64b5cf); }
+	.abstract-3 { background: linear-gradient(135deg, #0c4639, #128768 55%, #71d6a7); }
+	.abstract-visual span { color: rgb(255 255 255 / 0.75); font-size: var(--text-sm); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; z-index: 1; }
+	.abstract-visual strong { color: white; font-family: var(--font-brand); font-size: clamp(2rem, 8vw, 4rem); z-index: 1; }
 
 	.content > :global(* + *) {
 		margin-top: 1rem;
@@ -102,7 +138,13 @@ const { Content } = await entry.render();
 		margin: 1.5rem 0;
 	}
 
+	.content :global(h2) { font-size: var(--text-2xl); }
+	.content :global(h3) { font-size: var(--text-xl); }
+
 	.content :global(img) {
+		display: block;
+		width: 100%;
+		margin-top: 2rem;
 		border-radius: 1.5rem;
 		box-shadow: var(--shadow-sm);
 		background: var(--gradient-subtle);
@@ -110,10 +152,10 @@ const { Content } = await entry.render();
 	}
 
 	.content :global(blockquote) {
-		font-size: var(--text-lg);
+		font-size: var(--text-md);
 		font-family: var(--font-brand);
 		font-weight: 600;
-		line-height: 1.1;
+		line-height: 1.35;
 		padding-inline-start: 1.5rem;
 		border-inline-start: 0.25rem solid var(--accent-dark);
 		color: var(--gray-0);
@@ -134,18 +176,10 @@ const { Content } = await entry.render();
 	}
 
 	@media (min-width: 50em) {
-		.back-link {
-			display: block;
-			align-self: flex-start;
-		}
-
-		.details {
-			flex-direction: row;
-			gap: 2.5rem;
-		}
+		.content :global(h2) { font-size: var(--text-3xl); }
 
 		.content :global(blockquote) {
-			font-size: var(--text-2xl);
+			font-size: var(--text-lg);
 		}
 	}
 </style>

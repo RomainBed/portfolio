@@ -1,12 +1,14 @@
 ---
 interface Props {
 	href: string;
+	variant?: 'primary' | 'secondary';
+	external?: boolean;
 }
 
-const { href } = Astro.props;
+const { href, variant = 'primary', external = false } = Astro.props;
 ---
 
-<a href={href}><slot /></a>
+<a class:list={[variant]} href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}><slot /></a>
 
 <style>
 	a {
@@ -14,7 +16,7 @@ const { href } = Astro.props;
 		display: flex;
 		place-content: center;
 		text-align: center;
-		padding: 0.56em 2em;
+		padding: 0.8rem 1.5rem;
 		gap: 0.8em;
 		color: var(--accent-text-over);
 		text-decoration: none;
@@ -26,9 +28,16 @@ const { href } = Astro.props;
 		white-space: nowrap;
 	}
 
+	a.secondary {
+		color: var(--gray-100);
+		border: 1px solid var(--gray-700);
+		background: var(--gray-999);
+		box-shadow: var(--shadow-sm);
+	}
+
 	@media (min-width: 20em) {
 		a {
-			font-size: var(--text-lg);
+			font-size: var(--text-base);
 		}
 	}
 
@@ -49,8 +58,8 @@ const { href } = Astro.props;
 
 	@media (min-width: 50em) {
 		a {
-			padding: 1.125rem 2.5rem;
-			font-size: var(--text-xl);
+			padding: 0.9rem 1.75rem;
+			font-size: var(--text-md);
 		}
 	}
 </style>
